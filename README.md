@@ -47,5 +47,6 @@ Example using [Spring framework](https://medium.com/trendyol-tech/high-availabil
 
 ## Setup
 
-1. [Redis configuration](./.github/redis)
+1. [Redis - Configurations and Tests](./.github/redis)
+1. [OSGi - Key Explanations](./.github/redis)
 
