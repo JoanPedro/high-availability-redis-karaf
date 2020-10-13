@@ -1,4 +1,4 @@
-# High availability system
+# Quickstart: High Availability System
 Computing environments configured to provide nearly full-time availability are known as [high availability](https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm#:~:text=Computing%20environments%20configured%20to%20provide,single%20points%2Dof%2Dfailure) systems. Such systems typically have redundant hardware and software that makes the system available despite failures. Well-designed high availability systems avoid having single points-of-failure.
 
 # Redis
@@ -25,9 +25,14 @@ Sentinel constantly checks the master for a failure. If enough sentinel agrees t
 
 Sentinel agreement depends on the quorum value. Quorum value is the minimum number of the sentinels agree that the master is not reachable now. For 3 sentinel instances, the usual quorum value is 2.
 
-See more in [Redis Sentinel](https://redis.io/topics/sentinel).
-<br>
-Example using [Spring framework](https://medium.com/trendyol-tech/high-availability-with-redis-sentinel-and-spring-lettuce-client-9da40525fc82)
+<p></p>
 <br>
 <img align="center" src="./.github/Sentinel.png" alt="High availability Design System">
+
+## After all, what does this mean for the proposed example?
+This means that they will connect to the sentinel instances and the sentinel instances will provide the most recent master node.
+
+See more in [Redis Sentinel](https://redis.io/topics/sentinel).
+<br>
+Example using [Spring framework](https://medium.com/trendyol-tech/high-availability-with-redis-sentinel-and-spring-lettuce-client-9da40525fc82).
 
