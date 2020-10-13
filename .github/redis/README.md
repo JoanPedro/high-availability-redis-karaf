@@ -116,4 +116,4 @@ After killing the master we can see that replica loses connection with the maste
 
 This statement can be validated with the SENTINEL masters command and verifying that the master's IP is no longer 6379, but 6380.
 
-[Back to main folder](../..)
+[Back to main folder](../../tree/main)
