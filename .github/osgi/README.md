@@ -143,7 +143,7 @@ Retention: CLASS
 Target: METHOD
 
 ## Secundady Annotations: @Reference
-If a component has dependencies on other services then they can be referenced with the Reference annotation that can be applied to a bind method or a field. For a field, the defaults for the Reference annotation are:
+If a component **has dependencies** on other services then they can be referenced with the Reference annotation that **can be applied to a bind method or a field**. For a field, the defaults for the Reference annotation are:
 
 1. The name of the bind method or field is used for the name of the reference.
 2. 1:1 cardinality if the field is not a collection. 0..n cardinality if the field is a collection.
