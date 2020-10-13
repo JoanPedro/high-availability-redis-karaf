@@ -65,9 +65,9 @@ The following class registers an IEmailValidator and IComparerValidator service:
 - Note: If the component wants to be updated for changes in the configuration properties than it can also indicated the modified method with the Modified annotation.
 
 <img align="center" src="./.github/IComparer.PNG" alt="IComparer Interface">
-<p align="center"> IEmailValidator - Interface </p>
-<img align="center" src="./.github/IEmail.PNG" alt="IEmail Interface">
 <p align="center"> IComparerValidator - Interface </p>
+<img align="center" src="./.github/IEmail.PNG" alt="IEmail Interface">
+<p align="center"> IEmailValidator - Interface </p>
 <img align="center" src="./.github/ValidatorImp.PNG" alt="IEmail Interface">
 <p align="center"> Validator Implementation - Register </p>
 
