@@ -115,3 +115,5 @@ sudo fuser -n tcp -k 6379
 After killing the master we can see that replica loses connection with the master. Sentinel instances go to sdown condition then quorum is met and odown condition is reached. The failover is started after 10 seconds since that is my configuration and after failover, the replica is promoted to be master.
 
 This statement can be validated with the SENTINEL masters command and verifying that the master's IP is no longer 6379, but 6380.
+
+![Back to main folder](../../main)
