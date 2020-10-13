@@ -1,0 +1,57 @@
+<features name="karaf-redis-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <feature name="karaf-redis-domain" version="${project.version}">
+        <bundle>mvn:br.com.quickstart.karaf-redis/domain/${project.version}</bundle>
+    </feature>
+    
+    <feature name="karaf-redis-data" version="${project.version}">
+        <!-- Domain -->
+        <feature version="${project.version}">karaf-redis-domain</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/data/${project.version}</bundle>
+    </feature>
+    
+ 	<feature name="karaf-redis-infra" version="${project.version}">
+        <!-- Karaf SCR -->
+        <feature version='4.1.4'>scr</feature>
+        
+        <!-- Lettuce -->
+        <bundle>wrap:mvn:io.lettuce/lettuce-core/5.3.2.RELEASE</bundle>
+        <bundle>mvn:io.zipkin.brave/brave/5.11.2</bundle>
+        <bundle>mvn:io.zipkin.zipkin2/zipkin/2.19.3</bundle>
+        <bundle>mvn:io.zipkin.reporter2/zipkin-reporter/2.12.1</bundle>
+        <bundle>mvn:io.projectreactor/reactor-core/3.3.8.RELEASE</bundle>
+        <bundle>mvn:org.reactivestreams/reactive-streams/1.0.3</bundle>
+        <bundle>wrap:mvn:io.micrometer/micrometer-core/1.1.2</bundle>
+        <bundle>wrap:mvn:org.jetbrains.kotlin/kotlin-stdlib/1.2.51</bundle>
+        <bundle>mvn:io.netty/netty-common/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-handler/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-transport/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec-redis/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec-socks/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-resolver/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-buffer/4.1.51.Final</bundle>
+        <bundle>mvn:com.google.code.findbugs/annotations/3.0.1</bundle>
+        
+        <!-- Data -->
+    	<feature version="${project.version}">karaf-redis-data</feature>
+    	
+        <bundle>mvn:br.com.quickstart.karaf-redis/infra/${project.version}</bundle>
+    </feature>
+
+    <feature name="karaf-redis-presentation" version="${project.version}">
+    	<!-- Domain -->
+        <feature version="${project.version}">karaf-redis-domain</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/presentation/${project.version}</bundle>
+    </feature>
+
+    <feature name="karaf-redis-utils" version="${project.version}">
+    	<!-- Presentation -->
+        <feature version="${project.version}">karaf-redis-presentation</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/utils/${project.version}</bundle>
+    </feature>
+    
+</features>

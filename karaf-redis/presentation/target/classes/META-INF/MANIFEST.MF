@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1602530880354
+Build-Jdk: 1.8.0_261
+Built-By: joan.o.souza
+Bundle-ManifestVersion: 2
+Bundle-Name: QUICKSTART :: KARAF-REDIS :: PRESENTATION
+Bundle-SymbolicName: presentation
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime;inline=true
+Embed-Directory: target/dependency
+Embed-Transitive: true
+Export-Package: controller.protocols;version="0.0.1.SNAPSHOT",controller
+ .user;uses:="controller.protocols,org.osgi.dto";version="0.0.1.SNAPSHOT
+ ",utils;version="0.0.1.SNAPSHOT"
+Import-Package: controller.protocols,org.osgi.dto;version="[1.0,2)",org.
+ slf4j;version="[1.7,2)",usecase;version="[0.0,1)",utils
+Provide-Capability: osgi.service;objectClass:List<String>="controller.pr
+ otocols.IProtocol"
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.compone
+ nt)(version>=1.3.0)(!(version>=2.0.0)))",osgi.service;filter:="(objectC
+ lass=usecase.IGetValue)";effective:=active,osgi.service;filter:="(objec
+ tClass=usecase.IHashGet)";effective:=active,osgi.service;filter:="(obje
+ ctClass=usecase.IHashSet)";effective:=active,osgi.service;filter:="(obj
+ ectClass=usecase.IMapSet)";effective:=active,osgi.service;filter:="(obj
+ ectClass=usecase.ISetValue)";effective:=active,osgi.service;filter:="(o
+ bjectClass=utils.IComparerValidator)";effective:=active,osgi.service;fi
+ lter:="(objectClass=utils.IEmailValidator)";effective:=active,osgi.ee;f
+ ilter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/controller.user.SignUpController.xml
+Tool: Bnd-3.2.0.201605172007

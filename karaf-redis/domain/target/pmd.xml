@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.21.0" timestamp="2020-10-12T16:27:58.307">
+<file name="C:\karaf-examples\karaf-redis\domain\src\main\java\usecase\IHashGet.java">
+<violation beginline="4" endline="4" begincolumn="16" endcolumn="56" rule="UnnecessaryModifier" ruleset="Code Style" package="usecase" class="IHashGet" method="hashGet" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'hashGet': the method is declared in an interface type
+</violation>
+</file>
+<file name="C:\karaf-examples\karaf-redis\domain\src\main\java\usecase\IHashSet.java">
+<violation beginline="4" endline="4" begincolumn="16" endcolumn="68" rule="UnnecessaryModifier" ruleset="Code Style" package="usecase" class="IHashSet" method="hashSet" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'hashSet': the method is declared in an interface type
+</violation>
+</file>
+<file name="C:\karaf-examples\karaf-redis\domain\src\main\java\usecase\IMapSet.java">
+<violation beginline="6" endline="6" begincolumn="16" endcolumn="64" rule="UnnecessaryModifier" ruleset="Code Style" package="usecase" class="IMapSet" method="mapSet" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'mapSet': the method is declared in an interface type
+</violation>
+</file>
+</pmd>

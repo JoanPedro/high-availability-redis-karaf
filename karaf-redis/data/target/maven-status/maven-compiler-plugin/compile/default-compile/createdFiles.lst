@@ -1,0 +1,3 @@
+db\protocols\IEncrypter.class
+db\manager\CommandManager.class
+db\protocols\ICommands.class

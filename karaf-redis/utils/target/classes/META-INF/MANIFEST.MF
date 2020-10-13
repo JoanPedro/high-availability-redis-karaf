@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1602530882389
+Build-Jdk: 1.8.0_261
+Built-By: joan.o.souza
+Bundle-ManifestVersion: 2
+Bundle-Name: QUICKSTART :: KARAF-REDIS :: UTILS
+Bundle-SymbolicName: utils
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime;inline=true
+Embed-Directory: target/dependency
+Embed-Transitive: true
+Export-Package: validator;uses:=utils;version="0.0.1.SNAPSHOT"
+Import-Package: utils;version="[0.0,1)"
+Provide-Capability: osgi.service;objectClass:List<String>="utils.ICompar
+ erValidator,utils.IEmailValidator"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/validator.ValidatorImplementation.xml
+Tool: Bnd-3.2.0.201605172007

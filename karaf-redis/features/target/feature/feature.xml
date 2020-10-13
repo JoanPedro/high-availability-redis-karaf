@@ -1,0 +1,57 @@
+<features name="karaf-redis-0.0.1-SNAPSHOT" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <feature name="karaf-redis-domain" version="0.0.1-SNAPSHOT">
+        <bundle>mvn:br.com.quickstart.karaf-redis/domain/0.0.1-SNAPSHOT</bundle>
+    </feature>
+    
+    <feature name="karaf-redis-data" version="0.0.1-SNAPSHOT">
+        <!-- Domain -->
+        <feature version="0.0.1-SNAPSHOT">karaf-redis-domain</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/data/0.0.1-SNAPSHOT</bundle>
+    </feature>
+    
+ 	<feature name="karaf-redis-infra" version="0.0.1-SNAPSHOT">
+        <!-- Karaf SCR -->
+        <feature version='4.1.4'>scr</feature>
+        
+        <!-- Lettuce -->
+        <bundle>wrap:mvn:io.lettuce/lettuce-core/5.3.2.RELEASE</bundle>
+        <bundle>mvn:io.zipkin.brave/brave/5.11.2</bundle>
+        <bundle>mvn:io.zipkin.zipkin2/zipkin/2.19.3</bundle>
+        <bundle>mvn:io.zipkin.reporter2/zipkin-reporter/2.12.1</bundle>
+        <bundle>mvn:io.projectreactor/reactor-core/3.3.8.RELEASE</bundle>
+        <bundle>mvn:org.reactivestreams/reactive-streams/1.0.3</bundle>
+        <bundle>wrap:mvn:io.micrometer/micrometer-core/1.1.2</bundle>
+        <bundle>wrap:mvn:org.jetbrains.kotlin/kotlin-stdlib/1.2.51</bundle>
+        <bundle>mvn:io.netty/netty-common/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-handler/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-transport/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec-redis/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec-socks/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-codec/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-resolver/4.1.51.Final</bundle>
+        <bundle>mvn:io.netty/netty-buffer/4.1.51.Final</bundle>
+        <bundle>mvn:com.google.code.findbugs/annotations/3.0.1</bundle>
+        
+        <!-- Data -->
+    	<feature version="0.0.1-SNAPSHOT">karaf-redis-data</feature>
+    	
+        <bundle>mvn:br.com.quickstart.karaf-redis/infra/0.0.1-SNAPSHOT</bundle>
+    </feature>
+
+    <feature name="karaf-redis-presentation" version="0.0.1-SNAPSHOT">
+    	<!-- Domain -->
+        <feature version="0.0.1-SNAPSHOT">karaf-redis-domain</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/presentation/0.0.1-SNAPSHOT</bundle>
+    </feature>
+
+    <feature name="karaf-redis-utils" version="0.0.1-SNAPSHOT">
+    	<!-- Presentation -->
+        <feature version="0.0.1-SNAPSHOT">karaf-redis-presentation</feature>
+        
+        <bundle>mvn:br.com.quickstart.karaf-redis/utils/0.0.1-SNAPSHOT</bundle>
+    </feature>
+    
+</features>

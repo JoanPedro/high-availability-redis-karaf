@@ -1,0 +1,5 @@
+usecase\IGetValue.class
+usecase\IHashSet.class
+usecase\ISetValue.class
+usecase\IMapSet.class
+usecase\IHashGet.class

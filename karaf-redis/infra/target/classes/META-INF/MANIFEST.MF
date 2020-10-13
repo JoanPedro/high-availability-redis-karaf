@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1602530886552
+Build-Jdk: 1.8.0_261
+Built-By: joan.o.souza
+Bundle-ManifestVersion: 2
+Bundle-Name: QUICKSTART :: KARAF-REDIS :: INFRA
+Bundle-SymbolicName: infra
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime;inline=true
+Embed-Directory: target/dependency
+Embed-Transitive: true
+Export-Package: encrypter;uses:="db.protocols";version="0.0.1.SNAPSHOT",
+ redisdb;uses:="db.protocols";version="0.0.1.SNAPSHOT"
+Import-Package: db.protocols;version="[0.0,1)",io.lettuce.core,io.lettuc
+ e.core.api,io.lettuce.core.api.sync,javax.crypto,javax.crypto.spec
+Provide-Capability: osgi.service;objectClass:List<String>="db.protocols.
+ ICommands",osgi.service;objectClass:List<String>="db.protocols.IEncrypt
+ er"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/encrypter.EncrypterImplementation.xml,OSGI-I
+ NF/redisdb.RedisImplementation.xml
+Tool: Bnd-3.2.0.201605172007

@@ -1,0 +1,5 @@
+utils\IComparerValidator.class
+utils\IEmailValidator.class
+controller\user\SignUpController.class
+controller\protocols\IProtocol.class
+controller\user\User.class
