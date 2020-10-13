@@ -29,5 +29,5 @@ See more in [Redis Sentinel](https://redis.io/topics/sentinel).
 <br>
 Example using [Spring framework](https://medium.com/trendyol-tech/high-availability-with-redis-sentinel-and-spring-lettuce-client-9da40525fc82)
 <br>
-![High availability Design System](./.github/Sentinel.png)
+<img align="center" src="./.github/Sentinel.png" alt="High availability Design System">
 
