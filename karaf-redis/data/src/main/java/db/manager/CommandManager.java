@@ -5,6 +5,7 @@ import java.util.Map;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
 import db.protocols.ICommands;
@@ -16,7 +17,7 @@ import usecase.IMapSet;
 import usecase.ISetValue;
 
 @Component(service = { ISetValue.class, IHashSet.class, IMapSet.class, IHashGet.class, IGetValue.class })
-public class CommandManager implements ISetValue, IHashSet, IMapSet, IGetValue, IHashGet {
+public class CommandManager implements ISetValue, IHashSet, IMapSet, IHashGet, IGetValue {
 	
 	@Reference
 	ICommands commands;
@@ -26,12 +27,17 @@ public class CommandManager implements ISetValue, IHashSet, IMapSet, IGetValue, 
 	
 	@Activate
 	public void onInit() {
-		// Sem implementação.
+		// Ciclo de vida não utilizado
 	}
 	
 	@Deactivate
 	public void onDestroy() {
-		// Sem implementação.
+		// Ciclo de vida não utilizado
+	}
+	
+	@Modified
+	public void onChange() {
+		// Ciclo de vida não utilizado
 	}
 
 	@Override

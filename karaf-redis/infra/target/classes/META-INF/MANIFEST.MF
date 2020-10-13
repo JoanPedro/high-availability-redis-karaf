@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1602530886552
+Bnd-LastModified: 1602613613726
 Build-Jdk: 1.8.0_261
 Built-By: joan.o.souza
 Bundle-ManifestVersion: 2
@@ -19,5 +19,5 @@ Provide-Capability: osgi.service;objectClass:List<String>="db.protocols.
  er"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Service-Component: OSGI-INF/encrypter.EncrypterImplementation.xml,OSGI-I
- NF/redisdb.RedisImplementation.xml
+ NF/redisdb.RedisCommandRepository.xml
 Tool: Bnd-3.2.0.201605172007

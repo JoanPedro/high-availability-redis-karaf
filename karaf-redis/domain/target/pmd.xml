@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.21.0" timestamp="2020-10-12T16:27:58.307">
+    version="6.21.0" timestamp="2020-10-13T15:26:46.321">
 <file name="C:\karaf-examples\karaf-redis\domain\src\main\java\usecase\IHashGet.java">
 <violation beginline="4" endline="4" begincolumn="16" endcolumn="56" rule="UnnecessaryModifier" ruleset="Code Style" package="usecase" class="IHashGet" method="hashGet" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
 Unnecessary modifier 'public' on method 'hashGet': the method is declared in an interface type

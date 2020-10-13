@@ -8,6 +8,7 @@ import java.util.Map;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.slf4j.Logger;
@@ -59,7 +60,7 @@ public class SignUpController implements IProtocol {
 	IHashGet hashGetValue;
 
 	@Activate
-	public void onInit() {
+	public void onInit(Map<String, Object> properties) {
 		this.logger.info("SignUpController iniciado!");
 		handle();
 	}
@@ -68,9 +69,16 @@ public class SignUpController implements IProtocol {
 	public void onDestroy() {
 		this.logger.info("SignUpController destruído!");
 	}
+	
+	@Modified
+	public void onChange(Map<String, Object> properties) {
+		// Ciclo de vida não utilizado
+	}
 
 	@Override
 	public void handle() {
+		System.out.println("//--- *** --- Exemplo 1: Criptografia --- *** --- \\");
+
 		User validUser = new User("ValidUser", VALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
 		User invalidEmailUser = new User("InvalidUser", INVALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
 		User invalidPasswordUser = new User("OtherInvalidUser", VALID_EMAIL, INVALID_PASSWORD, NO_MATCH_PASSWORD);
@@ -91,22 +99,25 @@ public class SignUpController implements IProtocol {
 
 		this.userList.stream().filter(user -> user.getIsValid())
 				.forEach(user -> this.setValue.set(user.getName(), user.getPassword()));
-
+		
 		this.userList.stream().filter(user -> user.getIsValid())
 				.forEach(user -> System.out.println("Senhas descryptografadas -> " + this.getValue.get(user.getName())));
 		
-		// 
-		
+		// --- *** ---
+		System.out.println("\n//--- *** --- Exemplo 2: Command service (1 - 1) --- *** --- \\");
+
 		this.hashSetValue.hashSet("joan", "nome1", "Pedro");
 		this.hashSetValue.hashSet("joan", "nome2", "Oliveira");
 		this.hashSetValue.hashSet("joan", "nome3", "de Souza");
-
+		
+		
 		for (Integer i = 1; i <= 3; i++) {
 			System.out.println("HashGet (Método hashSetValue) -> " + this.hashGetValue.hashGet("joan", "nome".concat(i.toString())));
 		}
 		
-		//
-		
+		// --- *** ---
+		System.out.println("\n//--- *** --- Exemplo 3: StreamAPI + Lambdas --- *** --- \\");
+
 		this.mapper.put("nome1", "Pedro2");
 		this.mapper.put("nome2", "Oliveira2");
 		this.mapper.put("nome3", "de Souza2");
@@ -115,6 +126,7 @@ public class SignUpController implements IProtocol {
 		
 		this.mapSetValue.mapSet("joan2", this.mapper);
 		
+		System.out.println("\n//--- *** --- Exemplo 4: Command service (1 - n) --- *** --- \\\\");
 		for (Integer i = 1; i <= 3; i++) {
 			System.out.println("HashGet (Método mapSetValue) -> " + this.hashGetValue.hashGet("joan2", "nome".concat(i.toString())));
 		}

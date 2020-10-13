@@ -72,23 +72,23 @@ As a result, i have one Master node, one replica, and three Sentinels:
 ## They must be applied to different terminals!
 - Terminal 1:
 ```
-redis-server /etc/redis/redis.conf
+$ redis-server /etc/redis/redis.conf
 ```
 - Terminal 2:
 ```
-redis-server /etc/redis/redis-replica.conf
+$ redis-server /etc/redis/redis-replica.conf
 ```
 
 You can **check running ports** and if the master and replica are synced or not:
 
 ```
-ss -ltpn | grep redis-server
+$ ss -ltpn | grep redis-server
 ```
 
 We also need to **run our sentinel instances**. You can run Sentinel instances by this command:
 
 ```
-redis-sentinel /path/to/redis-sentinel*.conf
+$ redis-sentinel /path/to/redis-sentinel*.conf
 ```
 - Note: redis-sentinel* -> Reference to each sentinel, which must also be started at different terminals.
 
@@ -98,8 +98,8 @@ redis-sentinel /path/to/redis-sentinel*.conf
 I will use Redis CLI to connect all nodes and use commands to get information or stored data. Let’s connect to a Sentinel and get info about our master and configurations.
 
 ```
-redis-cli -p 26379
-SENTINEL masters
+$ redis-cli -p 26379
+$ SENTINEL masters
 ```
 
 **Observe** the settings of: Master, Running Port, Down Seconds, Number of Replicas, Quorum configuration.
