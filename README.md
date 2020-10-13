@@ -5,6 +5,7 @@
 - [Apache Maven](http://maven.apache.org/)
 - [OSGi Framework](https://www.osgi.org/)
 - [Redis](https://redis.io/)
+- [Lettuce](https://lettuce.io/core/5.3.2.RELEASE/reference/)
 - [Java 8+](https://www.java.com/en/download/)
 
 ## High Availability System
@@ -50,3 +51,61 @@ Example using [Spring framework](https://medium.com/trendyol-tech/high-availabil
 1. [Redis - Configurations and Tests](./.github/redis)
 2. [OSGi - Key Explanations](./.github/osgi)
 3. [Application - Clean Domain-Driven Design](./.github/app)
+4. [Apache Karaf - Karaf Container](./.github/karaf)
+
+# Startup
+This example shows how to use Redis as data storage and configure a high availability system with Sentinels.
+
+## Artifacts
+
+- **karaf-redis-data** provides Commands and Encrypter as Service interface and implements UseCases.
+- **karaf-redis-domain** provides UseCases as Service interface.
+- **karaf-redis-infra** implements EncrypterAdapter and RedisCommandsAdapter. 
+- **karaf-redis-presentation** provides entry-point, provides and implements a Protocol (with handle behaviour).
+- **karaf-redis-utils** implements ValidatorAdapter.
+- **karaf-redis-features** provides the Karaf features repository used for the deployment.
+
+## Build
+The build uses Apache Maven. Simply use:
+```
+$ mvn clean install
+```
+
+## Features and Deployment
+On a running Karaf instance, register the features repository using:
+
+```
+karaf@root()> feature:repo-add mvn:br.com.quickstart.karaf-redis/features/LATEST/xml
+```
+
+Then you can install the Redis service and command features:
+
+```
+karaf@root()> feature:install karaf-redis-domain
+karaf@root()> feature:install karaf-redis-infra
+karaf@root()> feature:install karaf-redis-utils
+```
+
+## Result
+
+```
+//--- *** --- Exemplo 1: Criptografia --- *** --- \
+Senhas descryptografadas -> anyvalid_password
+Senhas descryptografadas -> other_anyvalid_password
+
+//--- *** --- Exemplo 2: Command service (1 - 1) --- *** --- \
+HashGet (Mtodo hashSetValue) -> Pedro
+HashGet (Mtodo hashSetValue) -> Oliveira
+HashGet (Mtodo hashSetValue) -> de Souza
+
+//--- *** --- Exemplo 3: StreamAPI + Lambdas --- *** --- \
+Stream de um Map<> -> de Souza2
+Stream de um Map<> -> Pedro2
+Stream de um Map<> -> Oliveira2
+
+//--- *** --- Exemplo 4: Command service (1 - n) --- *** --- \\
+HashGet (Mtodo mapSetValue) -> Pedro2
+HashGet (Mtodo mapSetValue) -> Oliveira2
+HashGet (Mtodo mapSetValue) -> de Souza2
+FINAL
+```
