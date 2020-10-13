@@ -91,3 +91,27 @@ We also need to run our sentinel instances. You can run Sentinel instances by th
 redis-sentinel /path/to/redis-sentinel*.conf
 ```
 - Note: redis-sentinel* -> Reference to each sentinel, which must also be started at different terminals.
+
+![](./.github/RedisServerListen.PNG)
+<p align="center"> Redis-Server Listen </p>
+
+I will use Redis CLI to connect all nodes and use commands to get information or stored data. Let’s connect to a Sentinel and get info about our master and configurations.
+
+```
+redis-cli -p 26379
+SENTINEL masters
+```
+
+Observe the settings of: Master, Running Port, Down Seconds, Number of Replicas, Quorum configuration.
+
+## Failure case:
+Now let’s see what is the behavior of sentinel instances in case of master failure by killing the master node.
+
+Shutdown the master:
+```
+sudo fuser -n tcp -k 6379
+```
+
+After killing the master we can see that replica loses connection with the master. Sentinel instances go to sdown condition then quorum is met and odown condition is reached. The failover is started after 10 seconds since that is my configuration and after failover, the replica is promoted to be master.
+
+This statement can be validated with the SENTINEL masters command and verifying that the master's IP is no longer 6379, but 6380.
