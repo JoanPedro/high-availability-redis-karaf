@@ -1,40 +1,40 @@
 # OSGi - Key Explanation
-Some concepts of the OSGi framework are very important, and one of them is the Declarative Service Specification, which is one of the recurring specifications in this example.
+Some concepts of the OSGi framework are very important, and one of them is the **Declarative Service Specification**, which is one of the recurring specifications in this example.
 
 # Dealing with Increasing Complexity
-Why is it difficult to maintain a large code base over many years? Many projects get into more and more problems as soon as the code base becomes larger. The core of the problem is that the code is not modular: there is no clear separation between different parts of the code base.
+Why is it difficult to maintain a large code base over many years? Many projects get into more and more problems as soon as the code base becomes larger. The core of **the problem is that the code is not modular**: there is no clear separation between different parts of the code base.
 
-This can be improved by identifying separate parts of a system and strictly separating them from other parts of the code. Doing so starts with one of the most basic object orientation best practices: program to interfaces, not to implementations. By programming to interfaces only, you can make changes to implementations without breaking consumers of the interface.
+This can be improved by identifying separate parts of a system and strictly separating them from other parts of the code. Doing so starts with one of the most basic object orientation best practices: **program to interfaces, not to implementations**. By programming to interfaces only, you can **make changes** to implementations without breaking consumers of the interface.
 
 See more in [S.O.L.I.D Principles](https://www.baeldung.com/solid-principles).
 
 See more in [Building Modular Cloud Apps with OSGi: Practical Modularity with Java in the Cloud Age](https://www.amazon.com/Building-Modular-Cloud-Apps-OSGi/dp/1449345158).
 
 # OSGi Framework Overview
-The Framework forms the core of the OSGi Specifications. It provides a general-purpose, secure, and managed Java framework that supports the deployment of extensible and downloadable applications known as bundles.
+The Framework forms the core of the OSGi Specifications. It provides a **general-purpose, secure, and managed Java framework** that supports the deployment of extensible and downloadable applications known as bundles.
 
 OSGi-compliant devices can download and install OSGi bundles, and remove them when they are no longer required. The Framework manages the installation and update of bundles in an OSGi environment in a dynamic and scalable fashion. To achieve this, it manages the dependencies between bundles and services in detail.
 
 See more in [OSGi Core](https://docs.osgi.org/download/r6/osgi.core-6.0.0.pdf).
 
 # Declarative Service Specification
-The OSGi Framework contains a procedural service model which provides a publish/find/bind model for using services. This model is elegant and powerful, it enables the building of applications outof bundles that communicate and collaborate using these services.
+The OSGi Framework contains a procedural service model which **provides a publish/find/bind model for using services**. This model is elegant and powerful, it enables the building of applications outof bundles that communicate and collaborate using these services.
 
 This specification addresses some of the complications that arise when the OSGi service model is used for larger systems and wider deployments, such as:
 
-1. Startup Time - The procedural service model requires a bundle to actively register and acquire its services.
-2. Memory Footprint - A service registered with the Framework implies that the implementation, and related classes and objects, are loaded in memory.
-3. Complexity - Service can come and go at any time. This dynamic behavior makes the service programming model more complex than more traditional models.
+1. **Startup Time** - The procedural service model requires a bundle to actively register and acquire its services.
+2. **Memory Footprint** - A service registered with the Framework implies that the implementation, and related classes and objects, are loaded in memory.
+3. **Complexity** - Service can come and go at any time. This dynamic behavior makes the service programming model more complex than more traditional models.
 
 ## SCR - Service Component Runtime
-The Service Component Runtime reads component descriptions from started bundles. These descriptions are in the form of XML documents which define a set of components for a bundle.After a component configuration becomes satisfied, a number of different scenarios can take place depending on the component type:
+The Service Component Runtime reads component descriptions from started bundles. These descriptions are in the form of XML documents which define a set of components for a bundle. After a component configuration becomes satisfied, a number of different scenarios can take place depending on the component type:
 
-1. Immediate Component - The component configuration of an immediate component must be activated immediately after becoming satisfied. Immediate components may provide a service.
-2. Delayed Component - When a component configuration of a delayed component becomes satisfied, SCR will register the service specified by the service element without activating the component configuration.
-    1. Requested: SCR must activate the component configuration creating an instance of the component implementation class that will be returned as the service object. 
-    2. Bundle: For each distinct bundle that requests the service object, a different component configuration is created and activated and a new instance of the component implementation class is returned as the service object. 
-    3. Prototype: For each distinct request for the service object, such as via ServiceObjects, a different component configuration is created and activated and a new instance of the component implementation class is returned as the service object.
-3. Factory Component - If a component's description specifies the factory attribute of the component element, SCR will register a Component Factory service. This service allows client bundles to create and activate multiple component configurations and dispose of them. If the component's description also specifies a service element, then as each component configuration is activated, SCR will register it as a service.
+1. **Immediate Component** - The component configuration of an immediate component must be **activated immediately after becoming satisfied**. Immediate components may provide a service.
+2. **Delayed Component** - When a component configuration of a delayed component becomes satisfied, SCR will register the service specified by the service element without activating the component configuration.
+    1. **Requested**: **SCR must activate the component configuration** creating an instance of the component implementation class that will be returned as the service object. 
+    2. **Bundle**: **For each distinct bundle** that requests the service object, a **different component configuration is created and activated and a new instance of the component implementation class is returned as the service object. 
+    3. **Prototype**: **For each distinct request** for the service object, such as via ServiceObjects, a different component configuration is created and activated and a new instance of the component implementation class is returned as the service object.
+3. **Factory Component** - If a component's description specifies the factory attribute of the component element, **SCR will register a Component Factory** service. This service allows client bundles to create and activate multiple component configurations and dispose of them. If the component's description also specifies a service element, then as each component configuration is activated, SCR will register it as a service.
 
 ## Annotations
 A number of CLASS retention annotations have been provided to allow tools to construct the component description XML from the Java class files. For example, the **@Component** annotation synthesizes the implement element's class attribute from the type it is applied to.
