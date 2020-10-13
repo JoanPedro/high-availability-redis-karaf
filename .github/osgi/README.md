@@ -167,4 +167,6 @@ Retention: CLASS
 
 Target: METHOD, FIELD
 
+See more in [OSGi Compendium](https://docs.osgi.org/download/r6/osgi.cmpn-6.0.0.pdf).
+
 [Back to main folder](/../../tree/main)
