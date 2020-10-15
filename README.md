@@ -6,6 +6,7 @@
 - [OSGi Framework](https://www.osgi.org/)
 - [Redis](https://redis.io/)
 - [Lettuce](https://lettuce.io/core/5.3.2.RELEASE/reference/)
+- [Kryo](https://github.com/EsotericSoftware/kryo)
 - [Java 8+](https://www.java.com/en/download/)
 
 ## High Availability System
