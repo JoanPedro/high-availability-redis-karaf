@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1602613608023
+Bnd-LastModified: 1602769338525
 Build-Jdk: 1.8.0_261
 Built-By: joan.o.souza
 Bundle-ManifestVersion: 2
@@ -10,11 +10,12 @@ Created-By: Apache Maven Bundle Plugin
 Embed-Dependency: *;scope=compile|runtime;inline=true
 Embed-Directory: target/dependency
 Embed-Transitive: true
-Export-Package: controller.protocols;version="0.0.1.SNAPSHOT",controller
- .user;uses:="controller.protocols,org.osgi.dto";version="0.0.1.SNAPSHOT
- ",utils;version="0.0.1.SNAPSHOT"
-Import-Package: controller.protocols,org.osgi.dto;version="[1.0,2)",org.
- slf4j;version="[1.7,2)",usecase;version="[0.0,1)",utils
+Export-Package: controller.dto;version="0.0.1.SNAPSHOT",controller.proto
+ cols;version="0.0.1.SNAPSHOT",controller.user;uses:="controller.protoco
+ ls,org.osgi.dto";version="0.0.1.SNAPSHOT",utils;version="0.0.1.SNAPSHOT
+ "
+Import-Package: controller.dto,controller.protocols,org.osgi.dto;version
+ ="[1.0,2)",org.slf4j;version="[1.7,2)",usecase;version="[0.0,1)",utils
 Provide-Capability: osgi.service;objectClass:List<String>="controller.pr
  otocols.IProtocol"
 Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.compone
@@ -23,9 +24,10 @@ Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.compone
  tClass=usecase.IHashGet)";effective:=active,osgi.service;filter:="(obje
  ctClass=usecase.IHashSet)";effective:=active,osgi.service;filter:="(obj
  ectClass=usecase.IMapSet)";effective:=active,osgi.service;filter:="(obj
- ectClass=usecase.ISetValue)";effective:=active,osgi.service;filter:="(o
- bjectClass=utils.IComparerValidator)";effective:=active,osgi.service;fi
- lter:="(objectClass=utils.IEmailValidator)";effective:=active,osgi.ee;f
- ilter:="(&(osgi.ee=JavaSE)(version=1.8))"
+ ectClass=usecase.ISerializater)";effective:=active,osgi.service;filter:
+ ="(objectClass=usecase.ISetValue)";effective:=active,osgi.service;filte
+ r:="(objectClass=utils.IComparerValidator)";effective:=active,osgi.serv
+ ice;filter:="(objectClass=utils.IEmailValidator)";effective:=active,osg
+ i.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Service-Component: OSGI-INF/controller.user.SignUpController.xml
 Tool: Bnd-3.2.0.201605172007

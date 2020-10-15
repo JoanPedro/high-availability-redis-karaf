@@ -1,5 +1,8 @@
-utils\IComparerValidator.class
-utils\IEmailValidator.class
-controller\user\SignUpController.class
+controller\dto\UserDTO$Builder.class
+controller\dto\UserDTO.class
 controller\protocols\IProtocol.class
 controller\user\User.class
+utils\IComparerValidator.class
+utils\IEmailValidator.class
+controller\dto\KValueDTO.class
+controller\user\SignUpController.class

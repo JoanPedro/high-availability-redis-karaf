@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>br.com.quickstart.karaf-redis</groupId>
 		<artifactId>karaf-redis</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>infra</artifactId>
 	<name>QUICKSTART :: KARAF-REDIS :: INFRA</name>
 	<packaging>bundle</packaging>
-	
+
 	<properties>
 		<lib.lettuce.version>5.3.2.RELEASE</lib.lettuce.version>
 	</properties>
@@ -23,6 +23,12 @@
 			<groupId>io.lettuce</groupId>
 			<artifactId>lettuce-core</artifactId>
 			<version>${lib.lettuce.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware</groupId>
+			<artifactId>kryo</artifactId>
+			<version>5.0.0-RC6</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

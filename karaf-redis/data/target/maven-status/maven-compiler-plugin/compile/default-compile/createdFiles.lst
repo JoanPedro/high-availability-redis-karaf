@@ -1,3 +1,5 @@
 db\protocols\IEncrypter.class
+serializater\FileSerializer.class
 db\manager\CommandManager.class
 db\protocols\ICommands.class
+db\protocols\IStreamSerial.class

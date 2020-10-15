@@ -1,5 +1,6 @@
 package controller.user;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,16 +15,18 @@ import org.osgi.service.component.annotations.ServiceScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.dto.KValueDTO;
 import controller.protocols.IProtocol;
 import usecase.IGetValue;
 import usecase.IHashGet;
 import usecase.IHashSet;
 import usecase.IMapSet;
+import usecase.ISerializater;
 import usecase.ISetValue;
 import utils.IComparerValidator;
 import utils.IEmailValidator;
 
-@Component(service = IProtocol.class, scope = ServiceScope.SINGLETON, immediate = true)
+@Component(service = IProtocol.class, scope = ServiceScope.SINGLETON, immediate = true, configurationPid = "br.com.quickstart.karaf.redis")
 public class SignUpController implements IProtocol {
 
 	private static final String VALID_PASSWORD = "anyvalid_password";
@@ -49,19 +52,27 @@ public class SignUpController implements IProtocol {
 
 	@Reference
 	IHashSet hashSetValue;
-	
+
 	@Reference
 	IMapSet mapSetValue;
 
 	@Reference
 	IGetValue getValue;
-	
+
 	@Reference
 	IHashGet hashGetValue;
 
+	@Reference
+	ISerializater serializer;
+
 	@Activate
-	public void onInit(Map<String, Object> properties) {
+	@Modified
+	public void onInitOrChange(Map<String, Object> properties) {
 		this.logger.info("SignUpController iniciado!");
+		
+		System.out.println("//--- *** --- Exemplo 0: Lendo properties do ConfigurationPID --- *** --- \\");
+		properties.entrySet().stream().forEach(entry -> System.out.println(entry.getValue()));
+
 		handle();
 	}
 
@@ -69,70 +80,84 @@ public class SignUpController implements IProtocol {
 	public void onDestroy() {
 		this.logger.info("SignUpController destruído!");
 	}
-	
-	@Modified
-	public void onChange(Map<String, Object> properties) {
-		// Ciclo de vida não utilizado
-	}
 
 	@Override
 	public void handle() {
-		System.out.println("//--- *** --- Exemplo 1: Criptografia --- *** --- \\");
+		try {
+			System.out.println("//--- *** --- Exemplo 1: Criptografia --- *** --- \\");
 
-		User validUser = new User("ValidUser", VALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
-		User invalidEmailUser = new User("InvalidUser", INVALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
-		User invalidPasswordUser = new User("OtherInvalidUser", VALID_EMAIL, INVALID_PASSWORD, NO_MATCH_PASSWORD);
-		User otherValidUser = new User("OtherValidUser", OTHER_VALID_EMAIL, OTHER_VALID_PASSWORD, OTHER_VALID_PASSWORD);
+			User validUser = new User("ValidUser", VALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
+			User invalidEmailUser = new User("InvalidUser", INVALID_EMAIL, VALID_PASSWORD, VALID_PASSWORD);
+			User invalidPasswordUser = new User("OtherInvalidUser", VALID_EMAIL, INVALID_PASSWORD, NO_MATCH_PASSWORD);
+			User otherValidUser = new User("OtherValidUser", OTHER_VALID_EMAIL, OTHER_VALID_PASSWORD,
+					OTHER_VALID_PASSWORD);
 
-		this.userList.add(validUser);
-		this.userList.add(invalidEmailUser);
-		this.userList.add(invalidPasswordUser);
-		this.userList.add(otherValidUser);
+			this.userList.add(validUser);
+			this.userList.add(invalidEmailUser);
+			this.userList.add(invalidPasswordUser);
+			this.userList.add(otherValidUser);
 
-		this.userList.stream().forEach(user -> {
-			boolean isEmailValid = this.emailValidator.isValid(user.getEmail());
-			boolean isEqual = this.comparerValidator.isEqual(user.getPassword(), user.getPasswordConfirmation());
+			this.userList.stream().forEach(user -> {
+				boolean isEmailValid = this.emailValidator.isValid(user.getEmail());
+				boolean isEqual = this.comparerValidator.isEqual(user.getPassword(), user.getPasswordConfirmation());
 
-			if (isEmailValid && isEqual)
-				user.setIsValid(true);
-		});
+				if (isEmailValid && isEqual)
+					user.setIsValid(true);
+			});
 
-		this.userList.stream().filter(user -> user.getIsValid())
-				.forEach(user -> this.setValue.set(user.getName(), user.getPassword()));
-		
-		this.userList.stream().filter(user -> user.getIsValid())
-				.forEach(user -> System.out.println("Senhas descryptografadas -> " + this.getValue.get(user.getName())));
-		
-		// --- *** ---
-		System.out.println("\n//--- *** --- Exemplo 2: Command service (1 - 1) --- *** --- \\");
+			this.userList.stream().filter(user -> user.getIsValid())
+					.forEach(user -> this.setValue.set(user.getName(), user.getPassword()));
 
-		this.hashSetValue.hashSet("joan", "nome1", "Pedro");
-		this.hashSetValue.hashSet("joan", "nome2", "Oliveira");
-		this.hashSetValue.hashSet("joan", "nome3", "de Souza");
-		
-		
-		for (Integer i = 1; i <= 3; i++) {
-			System.out.println("HashGet (Método hashSetValue) -> " + this.hashGetValue.hashGet("joan", "nome".concat(i.toString())));
+			this.userList.stream().filter(user -> user.getIsValid()).forEach(
+					user -> System.out.println("Senhas descryptografadas -> " + this.getValue.get(user.getName())));
+
+			// --- *** ---
+			System.out.println("\n//--- *** --- Exemplo 2: Command service (1 - 1) --- *** --- \\");
+
+			this.hashSetValue.hashSet("joan", "nome1", "Pedro");
+			this.hashSetValue.hashSet("joan", "nome2", "Oliveira");
+			this.hashSetValue.hashSet("joan", "nome3", "de Souza");
+
+			for (Integer i = 1; i <= 3; i++) {
+				System.out.println("HashGet (Método hashSetValue) -> "
+						+ this.hashGetValue.hashGet("joan", "nome".concat(i.toString())));
+			}
+
+			// --- *** ---
+			System.out.println("\n//--- *** --- Exemplo 3: StreamAPI + Lambdas --- *** --- \\");
+
+			this.mapper.put("nome1", "Pedro2");
+			this.mapper.put("nome2", "Oliveira2");
+			this.mapper.put("nome3", "de Souza2");
+
+			this.mapper.entrySet().stream()
+					.forEach(map -> System.out.println("Stream de um Map<> -> " + map.getValue()));
+
+			this.mapSetValue.mapSet("joan2", this.mapper);
+
+			System.out.println("\n//--- *** --- Exemplo 4: Command service (1 - n) --- *** --- \\\\");
+			for (Integer i = 1; i <= 3; i++) {
+				System.out.println("HashGet (Método mapSetValue) -> "
+						+ this.hashGetValue.hashGet("joan2", "nome".concat(i.toString())));
+			}
+
+			// --- *** ---
+			System.out.println("\n//--- *** --- Exemplo 5: Serializer (1) --- *** --- \\\\");
+
+			KValueDTO kv = new KValueDTO();
+			kv.setKey("Testando");
+			kv.setValue("Valuando");
+
+			this.serializer.write("file.dat", kv, KValueDTO.class);
+
+			KValueDTO user2 = this.serializer.read("file.dat", KValueDTO.class);
+
+			System.out.println(user2.getKey() + " - " + user2.getValue());
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		
-		// --- *** ---
-		System.out.println("\n//--- *** --- Exemplo 3: StreamAPI + Lambdas --- *** --- \\");
 
-		this.mapper.put("nome1", "Pedro2");
-		this.mapper.put("nome2", "Oliveira2");
-		this.mapper.put("nome3", "de Souza2");
-		
-		this.mapper.entrySet().stream().forEach(map -> System.out.println("Stream de um Map<> -> " + map.getValue()));
-		
-		this.mapSetValue.mapSet("joan2", this.mapper);
-		
-		System.out.println("\n//--- *** --- Exemplo 4: Command service (1 - n) --- *** --- \\\\");
-		for (Integer i = 1; i <= 3; i++) {
-			System.out.println("HashGet (Método mapSetValue) -> " + this.hashGetValue.hashGet("joan2", "nome".concat(i.toString())));
-		}
-		
-		//
-		
 		System.out.println("FINAL");
 	}
 

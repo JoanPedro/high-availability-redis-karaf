@@ -1,3 +1,6 @@
+serializer\Test$SomeClass.class
 redisdb\RedisCommandRepository.class
 encrypter\CryptoHelper.class
+serializer\KryoAdapter.class
 encrypter\EncrypterImplementation.class
+serializer\Test.class

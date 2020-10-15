@@ -1,4 +1,5 @@
 usecase\IGetValue.class
+usecase\ISerializater.class
 usecase\IHashSet.class
 usecase\ISetValue.class
 usecase\IMapSet.class

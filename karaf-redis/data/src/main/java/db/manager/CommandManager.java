@@ -18,23 +18,23 @@ import usecase.ISetValue;
 
 @Component(service = { ISetValue.class, IHashSet.class, IMapSet.class, IHashGet.class, IGetValue.class })
 public class CommandManager implements ISetValue, IHashSet, IMapSet, IHashGet, IGetValue {
-	
+
 	@Reference
 	ICommands commands;
-	
+
 	@Reference
 	IEncrypter encrypter;
-	
+
 	@Activate
 	public void onInit() {
 		// Ciclo de vida não utilizado
 	}
-	
+
 	@Deactivate
 	public void onDestroy() {
 		// Ciclo de vida não utilizado
 	}
-	
+
 	@Modified
 	public void onChange() {
 		// Ciclo de vida não utilizado

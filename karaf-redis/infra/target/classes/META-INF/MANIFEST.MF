@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1602613613726
+Bnd-LastModified: 1602769343024
 Build-Jdk: 1.8.0_261
 Built-By: joan.o.souza
 Bundle-ManifestVersion: 2
@@ -11,13 +11,17 @@ Embed-Dependency: *;scope=compile|runtime;inline=true
 Embed-Directory: target/dependency
 Embed-Transitive: true
 Export-Package: encrypter;uses:="db.protocols";version="0.0.1.SNAPSHOT",
- redisdb;uses:="db.protocols";version="0.0.1.SNAPSHOT"
-Import-Package: db.protocols;version="[0.0,1)",io.lettuce.core,io.lettuc
- e.core.api,io.lettuce.core.api.sync,javax.crypto,javax.crypto.spec
+ redisdb;uses:="db.protocols";version="0.0.1.SNAPSHOT",serializer;uses:=
+ "com.esotericsoftware.kryo,db.protocols";version="0.0.1.SNAPSHOT"
+Import-Package: com.esotericsoftware.kryo;version="[5.0,6)",com.esoteric
+ software.kryo.io;version="[5.0,6)",db.protocols;version="[0.0,1)",io.le
+ ttuce.core,io.lettuce.core.api,io.lettuce.core.api.sync,javax.crypto,ja
+ vax.crypto.spec
 Provide-Capability: osgi.service;objectClass:List<String>="db.protocols.
  ICommands",osgi.service;objectClass:List<String>="db.protocols.IEncrypt
- er"
+ er",osgi.service;objectClass:List<String>="db.protocols.IStreamSerial"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Service-Component: OSGI-INF/encrypter.EncrypterImplementation.xml,OSGI-I
- NF/redisdb.RedisCommandRepository.xml
+ NF/redisdb.RedisCommandRepository.xml,OSGI-INF/serializer.KryoAdapter.x
+ ml
 Tool: Bnd-3.2.0.201605172007
